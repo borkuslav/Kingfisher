@@ -149,10 +149,10 @@ open class ImageCache {
         diskCachePath = diskCachePathClosure(path, cacheName)
         
         let ioQueueName = "com.onevcat.Kingfisher.ImageCache.ioQueue.\(name)"
-        ioQueue = DispatchQueue(label: ioQueueName)
+        ioQueue = DispatchQueue(label: ioQueueName, qos: .utility)
         
         let processQueueName = "com.onevcat.Kingfisher.ImageCache.processQueue.\(name)"
-        processQueue = DispatchQueue(label: processQueueName, attributes: .concurrent)
+        processQueue = DispatchQueue(label: processQueueName, qos: .utility,  attributes: .concurrent)
         
         ioQueue.sync { fileManager = FileManager() }
         
